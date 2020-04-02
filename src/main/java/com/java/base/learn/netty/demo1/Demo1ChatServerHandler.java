@@ -8,7 +8,9 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 /**
- * <p></p>
+ * <p>
+ *     服务器端转发广播消息
+ * </p>
  *
  * @author xiaodongsun
  * @date 2020/4/1 11:38 PM
@@ -33,16 +35,17 @@ public class Demo1ChatServerHandler extends SimpleChannelInboundHandler<String> 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        System.out.println("【服务器】：" + channel.remoteAddress() + " 加入\n");
+        channelGroup.writeAndFlush("【服务器】：" + channel.remoteAddress() + " 加入\n");
         channelGroup.add(channel);
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        System.out.println("【服务器】：" + channel.remoteAddress() + " 离开\n");
+        channelGroup.writeAndFlush("【服务器】：" + channel.remoteAddress() + " 离开\n");
         // 服务下线，会自动调用以下方法，剔除下线服务。
         //channelGroup.remove(channel);
+        //System.out.println(channelGroup.size());
     }
 
     @Override
