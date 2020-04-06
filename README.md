@@ -31,3 +31,13 @@ RPC：Remote Procedure Call，远程过程调用，很多RPC框架是跨语言�
 
 
 > Google Protobuf使用方式分析
+
+```
+protoc --java_out=src/main/java src/protobuf/Person.proto
+```
+
+> apache thrift 使用方式分析
+
+```
+thrift --gen java src/thrift/data.thrift
+```

@@ -1,4 +1,5 @@
-namespace java com.java.base.learn.thrift.demo
+namespace java java.thrift.generated
+namespace py py.thrift.generated
 
 typedef i16 short
 typedef i32 int
