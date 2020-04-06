@@ -202,6 +202,9 @@ $RECYCLE.BIN/
 .gradle
 build/
 
+### Thrift ###
+gen-java
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
