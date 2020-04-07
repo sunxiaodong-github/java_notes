@@ -15,7 +15,7 @@ public final class DataInfo {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface StudentOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.java.base.learn.protobuf.demo.Student)
+      // @@protoc_insertion_point(interface_extends:com.java.base.learn.protobuf.demo1.Student)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -64,11 +64,11 @@ public final class DataInfo {
         getAddressBytes();
   }
   /**
-   * Protobuf type {@code com.java.base.learn.protobuf.demo.Student}
+   * Protobuf type {@code com.java.base.learn.protobuf.demo1.Student}
    */
   public  static final class Student extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.java.base.learn.protobuf.demo.Student)
+      // @@protoc_insertion_point(message_implements:com.java.base.learn.protobuf.demo1.Student)
       StudentOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use Student.newBuilder() to construct.
@@ -463,11 +463,11 @@ public final class DataInfo {
       return builder;
     }
     /**
-     * Protobuf type {@code com.java.base.learn.protobuf.demo.Student}
+     * Protobuf type {@code com.java.base.learn.protobuf.demo1.Student}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.java.base.learn.protobuf.demo.Student)
+        // @@protoc_insertion_point(builder_implements:com.java.base.learn.protobuf.demo1.Student)
         com.java.base.learn.protobuf.demo.DataInfo.StudentOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -482,7 +482,7 @@ public final class DataInfo {
                 com.java.base.learn.protobuf.demo.DataInfo.Student.class, com.java.base.learn.protobuf.demo.DataInfo.Student.Builder.class);
       }
 
-      // Construct using com.java.base.learn.protobuf.demo.DataInfo.Student.newBuilder()
+      // Construct using com.java.base.learn.protobuf.demo1.DataInfo.Student.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -858,10 +858,10 @@ public final class DataInfo {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.java.base.learn.protobuf.demo.Student)
+      // @@protoc_insertion_point(builder_scope:com.java.base.learn.protobuf.demo1.Student)
     }
 
-    // @@protoc_insertion_point(class_scope:com.java.base.learn.protobuf.demo.Student)
+    // @@protoc_insertion_point(class_scope:com.java.base.learn.protobuf.demo1.Student)
     private static final com.java.base.learn.protobuf.demo.DataInfo.Student DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new com.java.base.learn.protobuf.demo.DataInfo.Student();
@@ -913,7 +913,7 @@ public final class DataInfo {
   static {
     java.lang.String[] descriptorData = {
       "\n\032src/protobuf/Student.proto\022!com.java.b" +
-      "ase.learn.protobuf.demo\"5\n\007Student\022\014\n\004na" +
+      "ase.learn.protobuf.demo1\"5\n\007Student\022\014\n\004na" +
       "me\030\001 \002(\t\022\013\n\003age\030\002 \001(\005\022\017\n\007address\030\003 \001(\tB/" +
       "\n!com.java.base.learn.protobuf.demoB\010Dat" +
       "aInfoH\001"

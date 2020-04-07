@@ -2,12 +2,15 @@ syntax = "proto3";
 
 package com.java.base.learn.grpc.demo;
 
-option java_package = "com.java.base.learn.grpc.demo";
+option java_package = "com.java.base.learn.grpc";
 option java_outer_classname = "StudentProto";
 option java_multiple_files = true;
 
 service StudentService {
     rpc GetRealNameByUsername (MyRequest) returns (MyResponse) {
+    }
+
+    rpc GetStudentsByAge (StudentRequest) returns (stream StudentResponse) {
     }
 }
 
@@ -16,5 +19,15 @@ message MyRequest {
 }
 
 message MyResponse {
-    string realname = 1;
+    string realname = 2;
+}
+
+message StudentResponse {
+    string name = 1;
+    int32 age = 2;
+    string city = 3;
+}
+
+message StudentRequest {
+    int32 age = 1;
 }

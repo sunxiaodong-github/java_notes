@@ -1,4 +1,4 @@
-package com.java.base.learn.grpc.demo;
+package com.java.base.learn.grpc.demo1;
 
 import com.java.base.learn.grpc.MyRequest;
 import com.java.base.learn.grpc.MyResponse;

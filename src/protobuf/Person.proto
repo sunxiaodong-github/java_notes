@@ -3,7 +3,7 @@ syntax = "proto2";
 package com.java.base.learn.protobuf.demo;
 
 option optimize_for = SPEED;
-option java_package = "com.java.base.learn.protobuf.demo";
+option java_package = "com.java.base.learn.protobuf.demo1";
 option java_outer_classname = "MyDataInfo";
 
 message MyMessage {
