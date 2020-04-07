@@ -1,10 +1,10 @@
-package com.java.base.learn.grpc.demo1;
+package com.java.base.learn.grpc.demo;
 
-import com.java.base.learn.grpc.MyRequest;
-import com.java.base.learn.grpc.MyResponse;
-import com.java.base.learn.grpc.StudentServiceGrpc;
+import com.java.base.learn.grpc.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+
+import java.util.Iterator;
 
 /**
  * <p></P>
@@ -19,5 +19,13 @@ public class GrpcClient {
         StudentServiceGrpc.StudentServiceBlockingStub blockingStub = StudentServiceGrpc.newBlockingStub(managedChannel);
         MyResponse myResponse = blockingStub.getRealNameByUsername(MyRequest.newBuilder().setUsername("偏执狂").build());
         System.out.println(myResponse.getRealname());
+
+        System.out.println("--------------------------");
+        Iterator<StudentResponse> iterator = blockingStub.getStudentsByAge(StudentRequest.newBuilder().setAge(21).build());
+        while (iterator.hasNext()){
+            StudentResponse studentResponse = iterator.next();
+            System.out.println(studentResponse.getName() + ", " + studentResponse.getAge() + ", " + studentResponse.getCity());
+        }
+        System.out.println("--------------------------");
     }
 }

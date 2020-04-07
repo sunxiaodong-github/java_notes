@@ -1,4 +1,4 @@
-group 'com.java.base.learn.demo1'
+group 'com.java.base.learn.demo'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

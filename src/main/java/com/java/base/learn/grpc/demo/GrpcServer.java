@@ -1,4 +1,4 @@
-package com.java.base.learn.grpc.demo1;
+package com.java.base.learn.grpc.demo;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;

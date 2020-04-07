@@ -4,11 +4,11 @@
 package com.java.base.learn.grpc;
 
 /**
- * Protobuf type {@code com.java.base.learn.grpc.MyRequest}
+ * Protobuf type {@code com.java.base.learn.grpc.demo.MyRequest}
  */
 public  final class MyRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:com.java.base.learn.grpc.MyRequest)
+    // @@protoc_insertion_point(message_implements:com.java.base.learn.grpc.demo.MyRequest)
     MyRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use MyRequest.newBuilder() to construct.
@@ -278,12 +278,12 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code com.java.base.learn.grpc.MyRequest}
+   * Protobuf type {@code com.java.base.learn.grpc.demo.MyRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:com.java.base.learn.grpc.MyRequest)
-          MyRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:com.java.base.learn.grpc.demo.MyRequest)
+      MyRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return StudentProto.internal_static_com_java_base_learn_grpc_demo_MyRequest_descriptor;
@@ -513,10 +513,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:com.java.base.learn.grpc.MyRequest)
+    // @@protoc_insertion_point(builder_scope:com.java.base.learn.grpc.demo.MyRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:com.java.base.learn.grpc.MyRequest)
+  // @@protoc_insertion_point(class_scope:com.java.base.learn.grpc.demo.MyRequest)
   private static final MyRequest DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new MyRequest();

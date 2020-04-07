@@ -4,7 +4,7 @@
 package com.java.base.learn.grpc;
 
 public interface MyResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:com.java.base.learn.grpc.MyResponse)
+    // @@protoc_insertion_point(interface_extends:com.java.base.learn.grpc.demo.MyResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
