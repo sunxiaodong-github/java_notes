@@ -3,6 +3,8 @@ package com.java.base.learn.grpc.demo;
 import com.java.base.learn.grpc.*;
 import io.grpc.stub.StreamObserver;
 
+import java.util.UUID;
+
 /**
  * <p></P>
  *
@@ -30,13 +32,12 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
         responseObserver.onNext(StudentResponse.newBuilder().setName("王五").setAge(21).setCity("chongqing").build());
         responseObserver.onNext(StudentResponse.newBuilder().setName("赵六").setAge(21).setCity("福建").build());
 
-        responseObserver.onCompleted();;
+        responseObserver.onCompleted();
     }
 
     @Override
     public StreamObserver<StudentRequest> getStudentsWrapperByAges(StreamObserver<StudentResponseList> responseObserver) {
         return new StreamObserver<StudentRequest>(){
-
             @Override
             public void onNext(StudentRequest value) {
                 System.out.println("onNext: " + value.getAge());
@@ -54,6 +55,27 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
                 StudentResponse studentResponse3 = StudentResponse.newBuilder().setName("wangwu").setAge(21).setCity("chongqing").build();
                 StudentResponseList list = StudentResponseList.newBuilder().addStudentResponse(studentResponse1).addStudentResponse(studentResponse2).addStudentResponse(studentResponse3).build();
                 responseObserver.onNext(list);
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    @Override
+    public StreamObserver<StreamRequest> biTalk(StreamObserver<StreamResponse> responseObserver) {
+        return new StreamObserver<StreamRequest>() {
+            @Override
+            public void onNext(StreamRequest value) {
+                System.out.println(value.getRequestInfo());
+                responseObserver.onNext(StreamResponse.newBuilder().setResponseInfo(UUID.randomUUID().toString()).build());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                System.out.println(t.getMessage());
+            }
+
+            @Override
+            public void onCompleted() {
                 responseObserver.onCompleted();
             }
         };

@@ -47,4 +47,14 @@ protobuf {
             grpc {}
         }
     }
+
+    generateProtoTasks.generatedFilesBaseDir = "src"
+
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {
+                setOutputSubDir 'java'
+            }
+        }
+    }
 }
