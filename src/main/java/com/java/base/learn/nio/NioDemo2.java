@@ -6,7 +6,14 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
- * <p></P>
+ * <p>
+ *     读取数据的逻辑为：
+ *
+ *     open a stream
+ *     while more information
+ *     read information
+ *     close the stream
+ * </p>
  *
  * @author sunxiaodong
  * @date 20-4-9 上午5:51
