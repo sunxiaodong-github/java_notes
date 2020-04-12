@@ -36,7 +36,11 @@ public class NioDemo1 {
         // 读写转换
         intBuffer.flip();
         System.out.println("after flip limit: " + intBuffer.limit());
+        System.out.println("enter while loop");
         while (intBuffer.hasRemaining()){
+            System.out.println("position " + intBuffer.position());
+            System.out.println("limit " + intBuffer.limit());
+            System.out.println("capacity " + intBuffer.capacity());
             System.out.println(intBuffer.get());
         }
     }

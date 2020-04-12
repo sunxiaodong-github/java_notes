@@ -7,36 +7,34 @@ import java.nio.channels.FileChannel;
 
 /**
  * <p>
- *     关于Nio Buffer中的3个重要状态属性的含义：position、capacity、limit
+ *     DirectByteBuffer 堆外内存与零拷贝
  * </p>
  *
  * @author sunxiaodong
- * @date 20-4-9 下午11:37
- **/
-public class NioDemo4 {
+ * @date 2020/4/12 10:01 AM
+ */
+public class NioDemo8 {
 
     public static void main(String[] args) throws Exception {
         FileInputStream inputStream = new FileInputStream("input.txt");
         FileOutputStream outputStream = new FileOutputStream("output.txt");
 
-        FileChannel inputChanel = inputStream.getChannel();
+        FileChannel inputChannel = inputStream.getChannel();
         FileChannel outputChannel = outputStream.getChannel();
 
-        ByteBuffer buffer = ByteBuffer.allocate(512);
+        ByteBuffer buffer = ByteBuffer.allocateDirect(512);
 
         while (true){
             buffer.clear();
-
-            int read = inputChanel.read(buffer);
-            System.out.println(read);
-
+            int read = inputChannel.read(buffer);
+            System.out.println("read: " + read);
             if (-1 == read){
                 break;
             }
             buffer.flip();
             outputChannel.write(buffer);
         }
-        inputChanel.close();
-        outputChannel.close();
+        inputStream.close();
+        outputStream.close();
     }
 }
