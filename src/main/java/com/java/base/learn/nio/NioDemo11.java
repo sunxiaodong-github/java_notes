@@ -31,20 +31,20 @@ public class NioDemo11 {
 
         while (true) {
             int byteRead = 0;
-            while (byteRead < messageLength){
+            while (byteRead < messageLength) {
                 long read = socketChannel.read(buffers);
                 byteRead += read;
                 System.out.println("byteRead: " + byteRead);
                 Arrays.asList(buffers).stream()
                         .map(
                                 buffer -> "position: " + buffer.position() + ", limit: " + buffer.limit())
-                .forEach(System.out::println);
+                        .forEach(System.out::println);
             }
 
             Arrays.asList(buffers).forEach(
                     buffer -> buffer.flip());
             long byteWritten = 0;
-            while (byteWritten < messageLength){
+            while (byteWritten < messageLength) {
                 long write = socketChannel.write(buffers);
                 byteWritten += write;
             }
