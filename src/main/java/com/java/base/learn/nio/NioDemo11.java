@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
  * <p>
- * 关于Buffer的Scattering与Gathering
+ *     关于Buffer的Scattering与Gathering
  * </p>
  *
  * @author sunxiaodong
