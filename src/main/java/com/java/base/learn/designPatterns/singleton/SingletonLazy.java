@@ -2,7 +2,7 @@ package com.java.base.learn.designPatterns.singleton;
 
 /**
  * <p>
- *     DCL（双重锁检测机制）synchronized与volatile结合使用、双重判断
+ *     单例实现方式 - 懒汉式 【DCL（双重检查）synchronized与volatile结合使用、并双重判断】
  * </p>
  *
  * @author sunxiaodong
