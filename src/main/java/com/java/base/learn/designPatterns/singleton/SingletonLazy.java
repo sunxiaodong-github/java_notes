@@ -2,7 +2,7 @@ package com.java.base.learn.designPatterns.singleton;
 
 /**
  * <p>
- * DCL（双重锁检测机制）synchronized与volatile结合使用
+ *     单例实现方式 - 懒汉式 【DCL（双重检查）synchronized与volatile结合使用、并双重判断】
  * </p>
  *
  * @author sunxiaodong
@@ -18,7 +18,9 @@ public class SingletonLazy {
     public static SingletonLazy getInstance() {
         if (instance == null) {
             synchronized (instance.getClass()) {
-                instance = new SingletonLazy();
+                if(instance == null){
+                    instance = new SingletonLazy();
+                }
             }
         }
         return instance;
