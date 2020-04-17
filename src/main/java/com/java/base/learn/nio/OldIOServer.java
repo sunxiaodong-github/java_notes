@@ -5,7 +5,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * <p></p>
+ * <p>
+ *     缺点：一个socket一个线程；服务端大量线程存在、线程上下文切换开销大；连接建立好以后可能部分线程并没有数据传输浪费开销。
+ * </p>
  *
  * @author sunxiaodong
  * @date 20-4-14 上午5:55
