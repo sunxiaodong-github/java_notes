@@ -69,3 +69,15 @@ Netty相比Java NIO来说，在事件处理器这个角色上进行一个升级�
 * Initiation Dispatcher（初始分发器）：它实际上就是Reactor角色。它本身定义了一些规范，这些规范用于控制事件的调度方式，
 同时又提供了应用进行事件处理器的注册、删除等设施。它本身是整个事件的核心所在，Initiation Dispatcher会通过同步事件分离器来等待事件的发生。
 一旦事件发生，Initiation Dispatcher首先会分离出每一个事件，然后调用事件处理器，最后调用相关的回调方法来处理这些事件。
+
+> Reactor模式的流程
+
+* 当应用向Initiation Dispatcher注册具体事件处理器时，应该会标识出该事件处理器希望Initiation Dispatcher在某个事件发生时向其通知的该事件，该事件与Handle关联。
+* Initiation Dispatcher会要求每个事件处理器都向其传递内部的Handle，该Handle向操作系统标识了事件处理器。
+* 当所有的事件处理器注册完毕后，应用会调用handler_event方法启动Initiation Dispatcher的事件循环。这时，Initiation Dispatcher会将每个注册的事件管理器的Handle合并起来。并使用同步事件分离器来等待这些事件的发生。
+比如说，TCP协议层会使用select同步事件分离器操作来等待客户端发送的数据到达连接的socket handle上。
+* 当与某个事件源对应的Handle变为ready状态时（比如说：TCP socket变为等待状态时），同步事件分离器就会通知Initiation Dispatcher。
+* Initiation Dispatcher会触发事件处理器（Event Handler）的回调方法，从而响应这个ready状态的Handle。
+当事件发生时，Initiation Dispatcher会将事件源激活的Handle做为【key】来寻找并分发恰当的事件处理器回调方法。
+* Initiation Dispatcher会回调事件处理器的handler_event回调方法来执行特定于应用的功能（开发者自己编写的功能），从而响应这个事件。
+所发生的事件类型可以作为该方法参数并被该方法内部使用来执行额外的特定于服务的分离和分发。
