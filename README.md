@@ -81,3 +81,11 @@ Netty相比Java NIO来说，在事件处理器这个角色上进行一个升级�
 当事件发生时，Initiation Dispatcher会将事件源激活的Handle做为【key】来寻找并分发恰当的事件处理器回调方法。
 * Initiation Dispatcher会回调事件处理器的handler_event回调方法来执行特定于应用的功能（开发者自己编写的功能），从而响应这个事件。
 所发生的事件类型可以作为该方法参数并被该方法内部使用来执行额外的特定于服务的分离和分发。
+
+> EventLoop关联关系
+
+1. 一个EventLoopGroup当中会包含一个或多个EventLoop。 
+2. 一个EventLoop在它的整个生命周期当中都只会与唯一一个Thread进行绑定（SingleThreadEventExecutor）。
+3. 所有由EventLoop所处理的各种I/O事件都将在它所关联的那个Thread上进行处理。
+4. 一个Channel在它的整个生命周期中只会注册一个EventLoop上。
+5. 一个EventLoop在运行过程当中，会被分配给一个或者多个Channel（一对多关联关系）。
