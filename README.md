@@ -90,11 +90,11 @@ Netty相比Java NIO来说，在事件处理器这个角色上进行一个升级�
 4. 一个Channel在它的整个生命周期中只会注册一个EventLoop上。
 5. 一个EventLoop在运行过程当中，会被分配给一个或者多个Channel（一对多关联关系）。
 
-**重要结论：**在Netty中，Channel的实现一定是线程安全的；基于此，我们可以存储一个Channel的引用，并且在需要向远程端点发送数据时，通过这个引用来调用Channel相应的方法；
-即便当时有很多线程都在使用它也不会出现线程问题；而且，消息一定会按照顺序发送出去。
+**重要结论：在Netty中，Channel的实现一定是线程安全的；基于此，我们可以存储一个Channel的引用，并且在需要向远程端点发送数据时，通过这个引用来调用Channel相应的方法；
+即便当时有很多线程都在使用它也不会出现线程问题；而且，消息一定会按照顺序发送出去。**
 
-**重要结论：**我们在业务开发中，不要将长时间执行的耗时任务放入到EventLoop的执行队列中，因为它将会一直阻塞该线程对应的所有Channel上其他执行任务，
-如果我们需要进行阻塞调用或是耗时的操作（实际开发中很常见），那么我们就需要使用一个专门的EventExecutor（业务线程池）。
+**重要结论：我们在业务开发中，不要将长时间执行的耗时任务放入到EventLoop的执行队列中，因为它将会一直阻塞该线程对应的所有Channel上其他执行任务，
+如果我们需要进行阻塞调用或是耗时的操作（实际开发中很常见），那么我们就需要使用一个专门的EventExecutor（业务线程池）。**
 
 > EventExecutor（业务线程池）通常两种实现方式：
 
@@ -105,11 +105,11 @@ Netty相比Java NIO来说，在事件处理器这个角色上进行一个升级�
 如果调用了ChannelPipeline addLast(EventExecutorGroup group, ChannelHandler... handlers);方法，
 那么ChannelHandler中的回调方法就是由参数中的group线程组来执行的。
 
-*JDK提供的Future只能通过手工方式检查执行结果，而这个操作是会阻塞的；Netty则对ChannelFuture进行了增强，通过ChannelFutureListener以回调的方式来获取执行结果，去除了手工检查阻塞的操作；
-值得注意的是：ChannelFutureListener的operationComplete方法是由I/O线程执行的，因此要注意的是不要在这里执行耗时操作，否则需要通过另外的线程或线程池来执行的。*
+**JDK提供的Future只能通过手工方式检查执行结果，而这个操作是会阻塞的；Netty则对ChannelFuture进行了增强，通过ChannelFutureListener以回调的方式来获取执行结果，去除了手工检查阻塞的操作；
+值得注意的是：ChannelFutureListener的operationComplete方法是由I/O线程执行的，因此要注意的是不要在这里执行耗时操作，否则需要通过另外的线程或线程池来执行的。**
 
-*在Netty中有两种发送消息的方式，可以直接写到Channel中，也可以写到与ChannelHandler所关联的那个ChannelHandlerContext中，对于前一种方式来说，消息会从
-ChannelPipeline的**末尾**开始流动；对于后一种方式来说，消息将从ChannelPipeline中的**下一个**ChannelHandler开始流动。*
+**在Netty中有两种发送消息的方式，可以直接写到Channel中，也可以写到与ChannelHandler所关联的那个ChannelHandlerContext中，对于前一种方式来说，消息会从
+ChannelPipeline的【末尾】开始流动；对于后一种方式来说，消息将从ChannelPipeline中的【下一个】ChannelHandler开始流动。**
 
 **结论：**
 1. ChannelHandlerContext与ChannelHandler之间的关联绑定关系是永远不会发生改变的，因此对其进行缓存是没有任何问题的。
