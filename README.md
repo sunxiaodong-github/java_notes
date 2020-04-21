@@ -116,3 +116,14 @@ ChannelPipeline的【末尾】开始流动；对于后一种方式来说，消�
 2. 对于与Channel的同名方法来说，ChannelHandlerContext的方法将会产生更短的事件流，所以我们应该在可能的情况下利用这个特性来提升应用性能。
 
 
+**使用NIO进行文件读取所涉及的步骤**
+
+1. 从FileInputStream对象获取到Channel对象；
+2. 创建Buffer；
+3. 将数据从Channel中读取到Buffer对象中（0 <= marks <= position <= limit <= capacity）。
+
+在读与写切换时需要调用 flip() 方法【将limit设置当前position、将position设置为0】；
+
+clear()方法【将limit设置为capacity、将position设置为0】；
+
+compact()方法【将所有未读的数据复制到Buffer起始位置处、将position设置为最后一个未读元素的后面、将limit设置为capacity、现在Buffer就准备好了，但是不会覆盖未读的数据】；
