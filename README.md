@@ -127,3 +127,49 @@ ChannelPipeline的【末尾】开始流动；对于后一种方式来说，消�
 clear()方法【将limit设置为capacity、将position设置为0】；
 
 compact()方法【将所有未读的数据复制到Buffer起始位置处、将position设置为最后一个未读元素的后面、将limit设置为capacity、现在Buffer就准备好了，但是不会覆盖未读的数据】；
+
+注意：通过索引来访问Byte时并不会改变真实的读索引与写索引；我们可以通过ByteBuf的readerIndex()与writerIndex()方法分别直接修改读索引与写索引。
+
+Netty ByteBuf所提供的3种缓冲区类型：
+
+1. heap buffer
+2. direct buffer
+3. composite buffer
+
+Heap Buffer（对缓冲区）
+
+这是最常用的类型，ByteBuf将数据存储到JVM的对空间中，并且将实际的数据放到byte array中实现。
+
+优点：由于数据是存储在JVM的堆中，因此可以快速的创建与快速的释放，并且它提供了直接的访问内部字节数组的方法
+缺点：每次读写数据时，都需要先将数据复制到直接缓冲区中再进行网络传播
+
+Direct Buffer（直接缓冲区）
+
+在堆之外直接分配内存空间，直接缓冲区并不会占用堆的容量空间，因为它是由操作系统在本地内存进行的数据分配。
+
+优点：在使用Socket进行数据传递时，性能非常好，因为数据直接位于操作系统的本地系统中，所以不需要从JVM将数据复制到直接缓冲区中，性能很好。
+缺点：因为Direct Buffer是直接在操作系统内存中，所以内存空间的分配与释放要比对空间更加复杂，而且速度要慢一些。
+Netty通过提供内存池来解决这个问题。直接缓冲区并不支持通过字节数组的方式访问数据。
+
+**重点：对于后端的业务消息的编码来说，推荐使用HeapByteBuf；对于I/O通信线程在读写缓冲区时，推荐使用DirectByteBuf。**
+
+Composite Buffer（复合缓冲区）
+
+> JDK的ByteBuffer与Netty的ByteBuf之间的差异比对：
+
+1. Netty的ByteBuf采用了读写索引分离的策略（readIndex与writeIndex），一个初始化（里面尚未有任何数据）的ByteBuf的readerIndex与writerIndex值都为0。
+2. 当读索引和写索引处于同一个位置时，如果继续读取，那么就会抛出IndexOutOfBoundException。
+3. 对于ByteBuf的任何读写的操作都会分别单独维护读索引和写索引。maxCapacity最大容量默认的限制就是Integer.MAX_VALUE。
+
+* JDK的ByteBuffer的缺点：
+
+1. final byte[] hb; 这是JDK的ByteBuffer对象中用于存储数据的对象声明；可以看到，其字节数组是被声明成final的，
+也就是长度是固定不变的，一旦分配好后不能动态的扩容与收缩；而且当带存储的字节很大时就会有可能出现：IndexOutOfBoundException，如果出现这个异常，那就需要在存储之前完全确定好存储的字节大小。
+如果ByteBuffer空间不足，我们只有一种解决方案：创建一个全新的ByteBuffer对象，然后再将之前的ByteBuffer中的数据复制过去，这一切操作都是需要由开发者自己手动完成。
+2. ByteBuffer只使用一个position指针来标识位置信息，在进行读写切换时就需要调用flip方法或是rewind方法，使用起来很不方便。
+
+* Netty的ByteBuf的优点：
+
+1. 存储字节的数组是动态的，其最大默认是Integer.MAX_VALUE，这里的动态性具体体现在write方法中的，write方法在执行时会判断buffer容量，如果不足则自动扩容。
+2. ByteBuffer的读写索引是完全分开的，使用起来很方便。
+

@@ -18,7 +18,13 @@ public class ByteBuffTest1 {
         }
 
         for (int i = 0; i < buffer.capacity(); i++) {
+            // 不会改变readIndex
             System.out.println(buffer.getByte(i));
+        }
+
+        for (int i = 0; i < buffer.capacity(); i++) {
+            // 会改变readIndex
+            System.out.println(buffer.readByte());
         }
     }
 }
