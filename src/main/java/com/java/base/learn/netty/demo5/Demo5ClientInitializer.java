@@ -15,6 +15,8 @@ public class Demo5ClientInitializer extends ChannelInitializer<io.netty.channel.
     @Override
     protected void initChannel(io.netty.channel.socket.SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
+        pipeline.addLast(new Demo5LongToByteEncoder());
+        pipeline.addLast(new Demo5ByteToLongDecoder());
         pipeline.addLast(new Demo5ClientHandler());
     }
 }

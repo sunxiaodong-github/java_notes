@@ -22,7 +22,7 @@ public class Demo5Server {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(parent, children).channel(NioServerSocketChannel.class).childHandler(new Demo5ServerInitializer());
             ChannelFuture channelFuture = serverBootstrap.bind(8888).sync();
-            channelFuture.channel().close().sync();
+            channelFuture.channel().closeFuture().sync();
         } finally {
             children.shutdownGracefully();
             parent.shutdownGracefully();

@@ -16,7 +16,8 @@ public class Demo5ServerInitializer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
         // 自定义入站解码器
-
+        pipeline.addLast(new Demo5ByteToLongDecoder());
+        pipeline.addLast(new Demo5LongToByteEncoder());
         pipeline.addLast(new Demo5ServerHandler());
     }
 }
