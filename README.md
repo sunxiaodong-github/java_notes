@@ -195,3 +195,7 @@ AtomicIntegerFieldUpdater要点总结：
 6. 解码：本质上是一种入站处理器；因此，解码一定是一种ChannelInboundHandler
 7. 在Netty中，编码器通常以xxxEncoder命名；解码器通常以xxxDecoder命名
 
+> 关于Netty编解码器的重要结论：
+
+1. 无论是编码器还是解码器，其所接收的消息类型必须要与待处理的参数类型一致，否则该编码器或解码器并不会被执行。
+2. 在解码器进行数据解码时，一定要判断缓冲(ByteBuf)中数据是否足够，否则将会产生一些问题。

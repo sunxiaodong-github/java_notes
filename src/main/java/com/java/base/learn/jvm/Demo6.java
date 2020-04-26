@@ -1,5 +1,7 @@
 package com.java.base.learn.jvm;
 
+import java.time.LocalDateTime;
+
 /**
  * <p></p>
  *
@@ -12,6 +14,7 @@ public class Demo6 {
         Singleton singleton = Singleton.getInstance();
         System.out.println("counter1: " + Singleton.counter1);
         System.out.println("counter2: " + Singleton.counter2);
+        System.out.println(LocalDateTime.now());
     }
 }
 
