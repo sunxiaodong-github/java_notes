@@ -102,3 +102,20 @@ Java编译器为它编译的每一个类都至少生成一个实例化的方法�
 #### 类的准备
      
 #### 类的初始化
+
+
+#### 类加载机制的父亲委托机制
+
+根类加载器
+
+扩展类加载器
+
+系统类加载器
+
+* Bootstrap ClassLoader /启动类加载器
+    * $JAVA_HOME中jre/lib/rt.jar里面所有的class，由C++实现，不是ClassLoader子类。
+* Extension ClassLoader /扩展类加载器
+    * 负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包
+* App ClassLoader /系统类加载器
+    * 负责加载classpath中指定的jar包及目录中class
+    
