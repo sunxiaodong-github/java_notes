@@ -1,7 +1,5 @@
 package com.java.base.learn.jvm;
 
-import java.util.Random;
-
 /**
  * <p>
  *     当一个接口在初始化时，并不是要求其父接口都完成了初始化
@@ -14,12 +12,41 @@ import java.util.Random;
 public class Demo5 {
 
     public static void main(String[] args) {
-        System.out.println(Child5.b);
+        //System.out.println(Child5.b);
+        System.out.println(Parent5_1.THREAD);
     }
 }
-interface Parent5 {
-    public static final int a = new Random().nextInt(3);
+interface Grandpa5 {
+    public static final Thread THREAD = new Thread(){
+        {
+            System.out.println("grandpa5 invoked!!!");
+        }
+    };
 }
-interface Child5 extends Parent5 {
-    public static final int b = new Random().nextInt(4);
+interface Parent5 extends Grandpa5 {
+    //public static final int a = 4;
+    public static final Thread THREAD = new Thread(){
+        {
+            System.out.println("parent5 invoked!!!");
+        }
+    };
+}
+class Child5 implements Parent5 {
+    //public static final int b = new Random().nextInt();
+    //public static final int b = 5;
+    public static int b = 5;
+}
+interface Grandpa5_1 {
+    public static final Thread THREAD = new Thread(){
+        {
+            System.out.println("grandpa5_1 invoked!!!");
+        }
+    };
+}
+interface Parent5_1 extends Grandpa5_1 {
+    public static final Thread THREAD = new Thread(){
+        {
+            System.out.println("parent5_1 invoked!!!");
+        }
+    };
 }

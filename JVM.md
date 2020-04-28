@@ -20,13 +20,13 @@
 > Java程序对类的使用方式可分为两种
 
 * 主动使用（七种）
-    * 创建类的实例（首次使用，只会初始化一次）
-    * 访问某个类或接口的静态变量，或者对该静态变量赋值
-    * 调用类的静态方法
-    * 反射（如：Class.forName("com.java.test.Test")）
-    * 初始化一个类的子类
-    * Java虚拟机启动时被标明为启动类的类（Java Test）
-    * JDK1.7开始提供的动态语言支持java.lang.invoke.MethodHandle实例的解析结果REF_getStatic，REF_putStatic，REF_invokeStatic句柄对应的类没有初始化，则初始化。
+    1. 创建类的实例（首次使用，只会初始化一次）
+    2. 访问某个类或接口的静态变量，或者对该静态变量赋值
+    3. 调用类的静态方法
+    4. 反射（如：Class.forName("com.java.test.Test")）
+    5. 初始化一个类的子类
+    6. Java虚拟机启动时被标明为启动类的类（Java Test）
+    7. JDK1.7开始提供的动态语言支持java.lang.invoke.MethodHandle实例的解析结果REF_getStatic，REF_putStatic，REF_invokeStatic句柄对应的类没有初始化，则初始化。
 
 除了以上7种情况，其他使用java类的方式都被看作是对类的被动使用，都不会导致类的初始化
 
@@ -118,4 +118,9 @@ Java编译器为它编译的每一个类都至少生成一个实例化的方法�
     * 负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包
 * App ClassLoader /系统类加载器
     * 负责加载classpath中指定的jar包及目录中class
-    
+
+> 类加载器的双亲委派机制
+
+* 在父亲委托机制中，各个加载器按照父子关系形成了树形结构，除了根类加载器之外，其余的类加载器都有且只有一个父加载器。
+
+        
