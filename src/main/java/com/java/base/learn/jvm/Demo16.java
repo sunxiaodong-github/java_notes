@@ -77,12 +77,13 @@ public class Demo16 extends ClassLoader {
 
         System.out.println();
 
+        // -XX:+TraceClassUnloading
         loader1 = null;
         clazz1 = null;
         instance1 = null;
         System.gc();
 
-        Thread.sleep(200000);
+        Thread.sleep(20000);
 
         loader1 = new Demo16("loader1");
         loader1.setPath("/home/sunxiaodong/Desktop/");
@@ -96,8 +97,9 @@ public class Demo16 extends ClassLoader {
          * 在同一个命名空间中，不会出现类的完整名字（包括类的包名）相同的两个类
          * 在不同的命名空间中，有可能会出现类的完整名字（包括类的包名）相同的两个类
          */
+        System.out.println();
         //Demo16 loader2 = new Demo16("loader2");
-        /*Demo16 loader2 = new Demo16(loader1, "loader2");
+        Demo16 loader2 = new Demo16(loader1, "loader2");
         loader2.setPath("/home/sunxiaodong/Desktop/");
         Class<?> clazz2 = loader2.loadClass("com.java.base.learn.jvm.Demo1");
         System.out.println("class2: " + clazz2.hashCode());
@@ -110,7 +112,7 @@ public class Demo16 extends ClassLoader {
         Class<?> clazz3 = loader3.loadClass("com.java.base.learn.jvm.Demo1");
         System.out.println("class2: " + clazz3.hashCode());
         Object instance3 = clazz3.newInstance();
-        System.out.println(instance3);*/
+        System.out.println(instance3);
 
     }
 
