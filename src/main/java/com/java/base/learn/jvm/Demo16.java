@@ -92,10 +92,8 @@ public class Demo16 extends ClassLoader {
         instance1 = clazz1.newInstance();
         System.out.println(instance1);
         /**
-         * 命名空间
-         * 每个类加载器都有自己的命名空间，命名空间由该加载器及所有父加载器所加载的类组成
-         * 在同一个命名空间中，不会出现类的完整名字（包括类的包名）相同的两个类
-         * 在不同的命名空间中，有可能会出现类的完整名字（包括类的包名）相同的两个类
+         * 1. 子加载器所加载的类能够访问到父加载器所加载的类
+         * 2. 父加载器所加载的类无法访问到子加载器所加载的类
          */
         System.out.println();
         //Demo16 loader2 = new Demo16("loader2");
