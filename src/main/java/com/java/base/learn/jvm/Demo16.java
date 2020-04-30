@@ -22,6 +22,10 @@ public class Demo16 extends ClassLoader {
         this.classLoaderName = classLoaderName;
     }
 
+    public Demo16(ClassLoader parent){
+        super(parent);
+    }
+
     public Demo16(ClassLoader parent, String classLoaderName) {
         // 显示指定该类的类加载器的父加载器
         super(parent);
