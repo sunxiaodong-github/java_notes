@@ -19,7 +19,8 @@ dependencies {
             "org.apache.thrift:libthrift:0.13.0",
             "io.grpc:grpc-stub:1.28.1",
             "io.grpc:grpc-protobuf:1.28.1",
-            "io.grpc:grpc-netty-shaded:1.28.1"
+            "io.grpc:grpc-netty-shaded:1.28.1",
+            "mysql:mysql-connector-java:5.1.46"
     )
     testCompile(
             "junit:junit:4.12"

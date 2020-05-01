@@ -9,7 +9,7 @@ import sun.misc.Launcher;
  *
  *     在oracle的Hotspot实现中，系统属性sun.boot.class.path如果修改错了，则运行会出错，提示错误信息：
  *          Error occurred during initialization of VM
- *          java/lang/NoClassDefFoundError: java/lang/Object
+ *          java.lang.NoClassDefFoundError: java.lang.Object
  *
  *    内建于JVM中的启动类加载器会加载java.lang.ClassLoader以及其他的java平台类，
  *    这些JVM启动时，一块特殊的机器码会运行，它会加载扩展类加载器与系统类加载器，
