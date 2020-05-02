@@ -18,9 +18,14 @@ public class Demo1 {
 
     public static void main(String[] args) {
         System.out.println(Child1.str);
-        /** 输出：Parent1 static block welcome */
-        //System.out.println(Child1.str2);
-        /** 输出：Parent1 static block Child static block welcome */
+        //输出：
+        // Parent1 static block
+        // welcome
+        /** System.out.println(Child1.str2); */
+        //输出：
+        // Parent1 static block
+        // Child static block
+        // welcome
     }
 }
 
