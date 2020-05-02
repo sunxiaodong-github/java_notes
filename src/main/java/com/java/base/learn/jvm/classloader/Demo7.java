@@ -1,4 +1,4 @@
-package com.java.base.learn.jvm;
+package com.java.base.learn.jvm.classloader;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ public class Demo7 {
         Class<?> clazz = Class.forName("java.lang.String");
         System.out.println(clazz.getClassLoader());
 
-        Class<?> clazz2 = Class.forName("com.java.base.learn.jvm.C");
+        Class<?> clazz2 = Class.forName("com.java.base.learn.jvm.classloader.C");
         System.out.println(clazz2.getClassLoader());
     }
 }

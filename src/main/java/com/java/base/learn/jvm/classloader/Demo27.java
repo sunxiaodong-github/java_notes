@@ -1,4 +1,4 @@
-package com.java.base.learn.jvm;
+package com.java.base.learn.jvm.classloader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +23,7 @@ public class Demo27 {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://47.100.238.213:3306/test1?useSSL=false", "root", "admin");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1?useSSL=false", "root", "admin");
         System.out.println(connection);
         connection.close();
 

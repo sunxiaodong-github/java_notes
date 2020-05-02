@@ -1,4 +1,4 @@
-package com.java.base.learn.jvm;
+package com.java.base.learn.jvm.classloader;
 
 /**
  * <p>
@@ -13,7 +13,7 @@ public class Demo18_1 {
     public static void main(String[] args) throws ClassNotFoundException {
         Demo16 loader = new Demo16("loader");
         loader.setPath("/Users/sunxiaodong/Desktop/");
-        Class<?> clazz = loader.loadClass("com.java.base.learn.jvm.Demo1");
+        Class<?> clazz = loader.loadClass("com.java.base.learn.jvm.classloader.Demo1");
         System.out.println(clazz.hashCode());
         System.out.println("class loader: " + clazz.getClassLoader());
     }

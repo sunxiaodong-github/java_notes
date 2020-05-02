@@ -1,4 +1,4 @@
-package com.java.base.learn.jvm;
+package com.java.base.learn.jvm.classloader;
 
 import java.io.*;
 
@@ -74,7 +74,7 @@ public class Demo16 extends ClassLoader {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException, InterruptedException {
         Demo16 loader1 = new Demo16("loader1");
         loader1.setPath("/home/sunxiaodong/Desktop/");
-        Class<?> clazz1 = loader1.loadClass("com.java.base.learn.jvm.Demo1");
+        Class<?> clazz1 = loader1.loadClass("com.java.base.learn.jvm.classloader.Demo1");
         System.out.println("class1: " + clazz1.hashCode());
         Object instance1 = clazz1.newInstance();
         System.out.println(instance1);
@@ -91,7 +91,7 @@ public class Demo16 extends ClassLoader {
 
         loader1 = new Demo16("loader1");
         loader1.setPath("/home/sunxiaodong/Desktop/");
-        clazz1 = loader1.loadClass("com.java.base.learn.jvm.Demo1");
+        clazz1 = loader1.loadClass("com.java.base.learn.jvm.classloader.Demo1");
         System.out.println("class1: " + clazz1.hashCode());
         instance1 = clazz1.newInstance();
         System.out.println(instance1);
@@ -103,7 +103,7 @@ public class Demo16 extends ClassLoader {
         //Demo16 loader2 = new Demo16("loader2");
         Demo16 loader2 = new Demo16(loader1, "loader2");
         loader2.setPath("/home/sunxiaodong/Desktop/");
-        Class<?> clazz2 = loader2.loadClass("com.java.base.learn.jvm.Demo1");
+        Class<?> clazz2 = loader2.loadClass("com.java.base.learn.jvm.classloader.Demo1");
         System.out.println("class2: " + clazz2.hashCode());
         Object instance2 = clazz2.newInstance();
         System.out.println(instance2);
@@ -111,7 +111,7 @@ public class Demo16 extends ClassLoader {
         System.out.println();
         Demo16 loader3 = new Demo16(loader2,"loader3");
         loader3.setPath("/home/sunxiaodong/Desktop/");
-        Class<?> clazz3 = loader3.loadClass("com.java.base.learn.jvm.Demo1");
+        Class<?> clazz3 = loader3.loadClass("com.java.base.learn.jvm.classloader.Demo1");
         System.out.println("class2: " + clazz3.hashCode());
         Object instance3 = clazz3.newInstance();
         System.out.println(instance3);

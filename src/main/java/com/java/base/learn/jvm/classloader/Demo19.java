@@ -1,10 +1,10 @@
-package com.java.base.learn.jvm;
+package com.java.base.learn.jvm.classloader;
 
 import com.sun.crypto.provider.AESKeyGenerator;
 
 /**
  * <p>
- *     扩展类加载器测试：java -Djava.ext.dirs=./ com.java.base.learn.jvm.Demo19
+ *     扩展类加载器测试：java -Djava.ext.dirs=./ com.java.base.learn.jvm.classloader.Demo19
  * </p>
  *
  * @author sunxiaodong

@@ -1,4 +1,4 @@
-package com.java.base.learn.jvm;
+package com.java.base.learn.jvm.classloader;
 
 /**
  * <p></p>
@@ -11,7 +11,7 @@ public class Demo17 {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         Demo16 loader1 = new Demo16("loader1");
         loader1.setPath("/home/sunxiaodong/Desktop/");
-        Class<?> clazz = loader1.loadClass("com.java.base.learn.jvm.Sample");
+        Class<?> clazz = loader1.loadClass("com.java.base.learn.jvm.classloader.Sample");
         System.out.println("clazz: " + clazz.hashCode());
         Object instance = clazz.newInstance();
     }

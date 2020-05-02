@@ -1,4 +1,4 @@
-package com.java.base.learn.jvm;
+package com.java.base.learn.jvm.classloader;
 
 import java.lang.reflect.Method;
 
@@ -20,8 +20,8 @@ public class Demo21 {
         Demo16 loader2 = new Demo16("loader2");
         loader1.setPath("/Users/sunxiaodong/Desktop/");
         loader2.setPath("/Users/sunxiaodong/Desktop/");
-        Class<?> clazz1 = loader1.loadClass("com.java.base.learn.jvm.Person");
-        Class<?> clazz2 = loader2.loadClass("com.java.base.learn.jvm.Person");
+        Class<?> clazz1 = loader1.loadClass("com.java.base.learn.jvm.classloader.Person");
+        Class<?> clazz2 = loader2.loadClass("com.java.base.learn.jvm.classloader.Person");
 
         System.out.println(clazz1 == clazz2);
 

@@ -1,4 +1,6 @@
-package com.java.base.learn.jvm;
+package com.java.base.learn.jvm.classloader;
+
+import com.java.base.learn.jvm.classloader.Cat;
 
 /**
  * <p></p>
