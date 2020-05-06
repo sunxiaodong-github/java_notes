@@ -30,10 +30,12 @@ loader1首先委托自己的父加载器去加载Sample，若父类加载器能�
 ### 类加载、连接与初始化
 
 * 加载：查找并加载类的二进制数据；
+
 * 连接：
     * 验证：验证被加载的类的正确性；
     * 准备： 为类的**静态变量**分配内存，并将其初始化为**默认值**；
     * 解析：**把类中的符号引用转换为直接引用。**
+    
 * **初始化： 为类的静态变量赋予正确的初始值。**
 
 ### Java程序对类的使用方式可分为两种
@@ -261,5 +263,24 @@ Java字节码对于异常的处理方式：
 1. 使用句柄的方式
 2. 使用直接指针的方式
 
+### JVM命令分析工具
+
+* jconsole (图形化工具)
+* jvisualvm (图形化工具)
+* jmap -clstats pid：获取当前运行环境的类加载器
+* jstat -gc pid  (MC 当前元空间容量 MU 已占用元空间容量)
+* jcmd(jdk7新增) pid VM.flags：查看jvm的启动参数
+* jcmd pid help：列出当前运行的java进程可以执行的操作
+* jcmd pid help VM.flags：查看具体命令的选项
+* jcmd pid PerfCounter.print ：查看JVM性能相关的参数
+* jcmd pid VM.uptime：JVM启动时长
+* jcmd pid GC.class_histogram：查看系统中类的统计信息
+* jcmd pid Thread.print：查看线程的堆栈信息
+* jcmd pid GC.heap_dump finename：导出Heap dump文件，导出的文件可以使用jvisualvm查看
+* jcmd pid VM.system_properties：查看JVM的属性信息
+* jcmd pid VM.command_line：查看JVM启动的命令行参数信息
+* jstack：查看或是导出java应用程序中线程的堆栈信息
+* jmc：Java Mission Control
+* jfr：Flight Record
 
 

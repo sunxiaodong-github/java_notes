@@ -20,7 +20,8 @@ dependencies {
             "io.grpc:grpc-stub:1.28.1",
             "io.grpc:grpc-protobuf:1.28.1",
             "io.grpc:grpc-netty-shaded:1.28.1",
-            "mysql:mysql-connector-java:5.1.46"
+            "mysql:mysql-connector-java:5.1.46",
+            "cglib:cglib:3.2.8"
     )
     testCompile(
             "junit:junit:4.12"

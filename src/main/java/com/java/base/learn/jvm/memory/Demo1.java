@@ -48,7 +48,7 @@ public class Demo1 {
         List<Demo1> list = new ArrayList();
         for (;;){
             list.add(new Demo1());
-            System.gc();
+            //System.gc();
         }
     }
 
