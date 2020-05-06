@@ -284,3 +284,62 @@ Java字节码对于异常的处理方式：
 * jfr：Flight Record
 
 
+### JVM运行时内存数据区域
+
+线程共享：方法区域（Method Area）、堆（Heap）
+线程隔离：Java虚拟机栈（JVM Stack）、本地方法栈（Native Method Stack）、程序计数器（Program Counter Register）
+
+* Java虚拟机栈（JVM Stack）
+
+    * Java虚拟机栈描述的是Java方法的执行模型：每个方法执行的时候都会创建一个帧（Frame）栈用于存放局部变量表，操作栈，动态链接，方法出口等信息。一个方法的执行过程，就是这个方法对于栈帧的入栈出栈过程。
+    * 线程隔离                     
+* 堆（Heap）    
+    * 堆里存放的是对象的实例
+    * 是Java虚拟机管理内存中最大的一块
+    * 是GC主要的工作区域，为了高效的GC，会把堆细分更多的子区域
+    * 线程共享
+* 方法区域（Method Area）
+    * 存放每个Class的结构信息，包括常量池、字段描述、方法描述
+    * GC的非主要工作区域
+    
+> JVM运行时内存数据区域-例子
+
+```
+public void method(){
+    Object obj = new Object();
+}
+```
+* 生成2部分的内存区域 (1)obj这个引用变量，因为是方法内的变量，放到JVM Stack里面；(2)真正Object class的实例对象，放到Heap
+* 上述的new语句一共消耗了12个bytes，JVM规定引用占4个字节（在JVM Stack），而空对象是8个bytes（在Heap）
+* 方法结束后，对应Stack中的变量马上回收，但是Heap中的对象要等到GC来回收。
+
+### JVM垃圾回收（GC）模型
+
+* 垃圾判断算法（引用计数算法、根搜索算法）
+* GC 算法
+* 垃圾回收器的实现和选择
+
+> 在Java语言中，GC Root包括
+
+* 在VM栈（帧中的本地变量）中的引用
+* 方法区中的静态引用
+* JNI（即一般说的Native方法）中的引用
+
+> 方法区
+
+* Java虚拟机规范表示可以不要求虚拟机在这区实现GC，这区GC的"性价比"一般比较低
+* 在堆中，尤其是在新生代，常规应用进行一次GC一般可以回收70%～95%的空间，而方法区的GC效率远小于此。
+* 当前的商业JVM都有实现方法区的GC，主要回收两部分内容：废弃常量与无用类。
+* 类回收需要满足以下3个条件
+    * 给类所有的实例都已经被GC，也就是JVM中不存在该Class的任何实例
+    * 加载该类的ClassLoader已经被GC
+    * 该类对应的java.lang.Class没有在任何地方被引用，如不能在任何地方通过反射访问该类的方法
+* 在大量使用反射、动态代理、CGLib等字节码框架、动态生成JSP以及OSGi这类频繁自定义ClassLoader的场景都需要JVM具备类卸载的支持以保证方法区不会溢出。
+
+### JVM常见GC算法
+
+* 标记-清除算法（Mark-Sweep）
+* 标记-整理算法（Mark-Compact）
+* 复制算法（Copying）
+* 分代算法（Generation）
+           
