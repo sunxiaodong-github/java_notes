@@ -1,7 +1,10 @@
 package com.java.base.learn.jvm.gc;
 
 /**
- * <p></p>
+ * <p>
+ *     PSYoungGen：Parallel Scavenge（新生代垃圾收集器）
+ *     ParOldGen：Parallel Old（老年代垃圾收集器）
+ * </p>
  *
  * @author sunxiaodong
  * @date 20-5-7 下午4:37
@@ -14,7 +17,7 @@ public class Demo1 {
         byte[] alloc1 = new byte[2 * size];
         byte[] alloc2 = new byte[2 * size];
         byte[] alloc3 = new byte[3 * size];
-        //byte[] alloc4 = new byte[2 * size];
+        byte[] alloc4 = new byte[3 * size];
         System.out.println("hello world");
     }
 }
