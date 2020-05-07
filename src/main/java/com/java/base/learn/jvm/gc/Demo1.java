@@ -9,6 +9,7 @@ package com.java.base.learn.jvm.gc;
 public class Demo1 {
 
     public static void main(String[] args) {
+        // -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8
         int size = 1024 * 1024;
         byte[] alloc1 = new byte[2 * size];
         byte[] alloc2 = new byte[2 * size];
