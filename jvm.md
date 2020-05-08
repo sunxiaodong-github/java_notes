@@ -437,3 +437,75 @@ public void method(){
 * 并行（Parallel）：指多个收集器的线程同时工作，但是用户线程处于等待状态
 * 并发（Concurrent）：指收集器在工作的同时，可以允许用户线程工作。
     * 并发不代表解决了GC停顿的问题，在关键的步骤还是要停顿。比如在收集器标记垃圾的时候。但在清除垃圾的时候，用户线程可以和GC线程并发执行。
+    
+### Serial收集器
+
+* 单线程收集器，收集时会暂停所有工作线程（Stop The World，简称STW），使用复制收集算法，虚拟机运行在Client模式时的默认新生代收集器。
+* 最早的收集器，单线程进行GC
+* New和Old Generation都可以使用
+* 在新生代，采用复制算法；在老年代，采用Mark-Compact算法
+* 因为是单线程GC，没有多线程切换的额外开销，简单实用
+* HotSpot Client模式缺省的收集器    
+
+### ParNew收集器
+
+* ParNew收集器就是Serial的多线程版本，除了使用多个收集线程之外，其余行为包括算法、STW、对象分配规则、回收策略等都与Serial收集器一模一样。
+* 对应的这种收集器是虚拟机运行在Server模式的默认新生代收集器，在单CPU的环境中，ParNew收集器并不会比Serial收集器有更好的效果。
+
+### Serial Old收集器
+
+* Serial Old是单线程收集器，使用标记-整理算法，是老年代的收集器
+
+### ParNew收集器
+
+* Serial收集器在新生代的多线程版本
+* 使用复制算法（因为针对新生代）
+* 只有在多CPU的环境下，效率才会比Serial收集器高
+* 可以通过-XX:ParalleGCThreads来控制GC线程数的多少。需要结合具体CPU的个数
+* Server模式下新生代的缺省收集器
+
+### Parallel Scavenge收集器
+
+* Parallel Scavenge收集器也是一个多个线程收集器，也是使用复制算法，但它的对象分配规则与回收策略都与ParNew收集器有所不同，它是以吞吐量最大化（即GC时间占总时间最小）为目标的收集器实现，它允许较长时间的STW换取总吞吐量最大化
+
+### Parallel Old收集器
+
+* 老年代版本吞吐量优先收集器，使用多线程和标记-整理算法，JVM1.6提供，在词之前，新生代使用了PS收集器的话，老年代除Serial Old外别无选择，因为PS无法与CMS收集器配合工作。
+* Parallel Scavenge 在老年代的实现
+* 在JVM1.6才出现Parallel Old
+* 采用多线程，Mark-Compact
+* 更注重吞吐量
+* Parallel Scavenge + Parallel Old = 高吞吐量，但GC停顿可能不理想
+
+### 集合数据管理不当
+
+* 当使用Array-based的数据结构（ArrayList，HashMap等）时，尽量减少resize
+    * 比如new ArrayList时，尽量估算size，在创建的时候把size确定
+    * 减少resize可以避免没有必要的array coping，gc碎片等问题
+* 如果一个List只需要顺序访问，不需要随机访问（Random Access），用LinkedList代替ArrayList
+    * LinkedList本质是链表，不需要resize，但只适合与顺序访问    
+
+### CMS(Concurrent Mark Sweep)收集器
+
+* CMS是一种以最短停顿时间为目标的收集器，使用CMS并不能达到GC效率最高（总体积GC时间最小），但它总能尽可能降低GC时服务的停顿时间，CMS收集器使用的是标记-清除算法
+* 追求最短停顿时间，非常适合Web应用
+* 只针对老年区，一般结合ParNew使用
+* Concurrent，GC线程和用户线程并发工作（尽量并发）
+* Mark-Sweep
+* 只有在多CPU环境下才有意义
+* 使用-XX:+UseConcMarkSweepGC打开
+
+### CMS收集器的缺点
+
+* CMS以牺牲CPU的代价来减少用户线程的停顿。当CPU个数少于4的时候，有可能对吞吐量影响非常大
+* CMS在并发清理的过程中，用户线程还在跑。这时候需要预留一部分空间给用户线程。
+* CMS用Mark-Sweep，会带来碎片问题。碎片过多的时候会容易频繁触发Full GC
+
+### Java内存泄露的经典原因
+
+* 对象定义在错误的范围
+* 异常（Exception）处理不当
+* 集合数据管理不当
+
+
+
