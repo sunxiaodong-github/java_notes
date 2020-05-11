@@ -150,3 +150,14 @@ SpringMvc 中的 HandlerAdapter, 就使用了适配器模式
 3)-消息管理
 消息类型：即时消息，延时消息
 消息分类：手机短信，邮件消息，QQ 消息...
+
+### 装饰者模式
+1)装饰者模式就像打包一个快递
+主体：比如：陶瓷、衣服 (Component) // 被装饰者
+包装：比如：报纸填充、塑料泡沫、纸板、木板(Decorator)
+2)Component 主体：比如类似前面的 Drink
+3)ConcreteComponent 和 Decorator
+ConcreteComponent：具体的主体， 比如前面的各个单品咖啡
+4)Decorator: 装饰者，比如各调料.
+
+> Java 的 IO 结构，FilterInputStream 就是一个装饰者
