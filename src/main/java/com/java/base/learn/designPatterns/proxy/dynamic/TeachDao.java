@@ -12,4 +12,9 @@ public class TeachDao implements ITeacherDao {
     public void teach() {
         System.out.println("授课中....");
     }
+
+    @Override
+    public void sayHello(String name) {
+        System.out.println(name + ", say hello");
+    }
 }

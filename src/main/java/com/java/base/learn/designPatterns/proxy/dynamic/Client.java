@@ -12,6 +12,6 @@ public class Client {
     public static void main(String[] args) {
         ITeacherDao target = new TeachDao();
         ITeacherDao teacherDao = (ITeacherDao) new ProxyFactory(target).getProxyInstance();
-        teacherDao.teach();
+        teacherDao.sayHello("tom");
     }
 }

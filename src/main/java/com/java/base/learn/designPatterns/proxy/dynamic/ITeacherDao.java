@@ -9,4 +9,6 @@ package com.java.base.learn.designPatterns.proxy.dynamic;
 public interface ITeacherDao {
 
     void teach();
+
+    void sayHello(String name);
 }
