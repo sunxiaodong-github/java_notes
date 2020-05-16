@@ -298,6 +298,74 @@ i >= IntegerCache.low && i <= IntegerCache.high  (-128 -- 127 范围没有创建
 5)一般模板方法都加上 final 关键字， 防止子类重写模板方法.
 6)模板方法模式使用场景：当要完成在某个过程，该过程要执行一系列步骤 ，这一系列的步骤基本相同，但其个别步骤在实现时 可能不同，通常考虑用模板方法模式来处理
 
+### 命令模式
+* 命令模式（Command Pattern）：在软件设计中，我们经常需要向某些对象发送请求，但是并不知道请求的接收者是谁，也不知道被请求的操作是哪个，
+我们只需在程序运行时指定具体的请求接收者即可，此时，可以使用命令模式来进行设计
+* 命名模式使得请求发送者与请求接收者消除彼此之间的耦合，让对象之间的调用关系更加灵活，实现解耦。
+* 在命名模式中，会将一个请求封装为一个对象，以便使用不同参数来表示不同的请求(即命名)，同时命令模式也支持可撤销的操作。
+* 通俗易懂的理解：将军发布命令，士兵去执行。其中有几个角色：将军（命令发布者）、士兵（命令的具体执行者）、命令(连接将军和士兵)。
+Invoker 是调用者（将军），Receiver 是被调用者（士兵），MyCommand 是命令，实现了 Command 接口，持有接收对象
+
+> 命名模式的角色及职责
+
+* Invoker 是调用者角色
+* Command: 是命令角色，需要执行的所有命令都在这里，可以是接口或抽象类
+* Receiver: 接受者角色，知道如何实施和执行一个请求相关的操作
+* ConcreteCommand: 将一个接受者对象与一个动作绑定，调用接受者相应的操作，实现 execute
+
+> 命令模式在 Spring 框架 JdbcTemplate 应用的源码分析
+
+* Spring 框架的 JdbcTemplate 就使用到了命令模式
+```
+@Override
+	@Nullable
+	public <T> T query(final String sql, final ResultSetExtractor<T> rse) throws DataAccessException {
+		Assert.notNull(sql, "SQL must not be null");
+		Assert.notNull(rse, "ResultSetExtractor must not be null");
+		if (logger.isDebugEnabled()) {
+			logger.debug("Executing SQL query [" + sql + "]");
+		}
+
+		/**
+		 * Callback to execute the query.
+		 */
+		class QueryStatementCallback implements StatementCallback<T>, SqlProvider {
+			@Override
+			@Nullable
+			public T doInStatement(Statement stmt) throws SQLException {
+				ResultSet rs = null;
+				try {
+					rs = stmt.executeQuery(sql);
+					return rse.extractData(rs);
+				}
+				finally {
+					JdbcUtils.closeResultSet(rs);
+				}
+			}
+			@Override
+			public String getSql() {
+				return sql;
+			}
+		}
+
+		return execute(new QueryStatementCallback());
+	}
+```
+* StatementCallback 接口 ,类似命令接口(Command)
+* class QueryStatementCallback implements StatementCallback<T>, SqlProvider，匿名内部类，实现了命令接口，同时也充当命令接收者
+* 命令调用者是 JdbcTemplate , 其中 execute(StatementCallback<T> action) 方法中，调用 action.doInStatement 方法.	不同的实现 StatementCallback 接口的对象，对应不同的 doInStatemnt 实现逻辑
+* 另外实现 StatementCallback 命令接口的子类还有QueryStatementCallback...
+
+**命令模式的注意事项和细节**
+
+* 将发起请求的对象与执行请求的对象解耦。发起请求的对象是调用者，调用者只要调用命令对象的 execute()方法就可以让接收者工作，而不必知道具体的接收者对象是谁、是如何实现的，命令对象会负责让接收者执行请求的动作，也就是说：”请求发起者”和“请求执行者”之间的解耦是通过命令对象实现的，命令对象起到了纽带桥梁的作用。
+* 容易设计一个命令队列。只要把命令对象放到列队，就可以多线程的执行命令
+* 容易实现对请求的撤销和重做
+* 命令模式不足：可能导致某些系统有过多的具体命令类，增加了系统的复杂度，这点在在使用的时候要注意
+* 空命令也是一种设计模式，它为我们省去了判空的操作。在上面的实例中，如果没有用空命令，我们每按下一个按键都要判空，这给我们编码带来一定的麻烦。
+* 命令模式经典的应用场景：界面的一个按钮都是一条命令、模拟 CMD（DOS 命令）订单的撤销/恢复、触发- 反馈机制
+
+
 ### 适配器模式
 
 
